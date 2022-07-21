@@ -168,6 +168,17 @@ impl Default for Context {
 }
 
 impl Context {
+    pub fn enable_interaction(&self, layer: LayerId, area: Rect) {
+        self.memory().areas.set_state(
+            layer,
+            area::State {
+                pos: area.min,
+                size: area.size(),
+                interactable: true
+            }
+        )
+    }
+
     fn read(&self) -> RwLockReadGuard<'_, ContextImpl> {
         self.0.read()
     }
